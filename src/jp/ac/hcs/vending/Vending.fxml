@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="800.0" prefWidth="400.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="jp.ac.hcs.vending.VendingController">
+	<children>
+		<ImageView fitHeight="800.0" fitWidth="400.0"
+			pickOnBounds="true" preserveRatio="true">
+			<image>
+				<Image url="@../../../../../assets/vending-back.png" />
+			</image>
+		</ImageView>
+		<GridPane layoutX="23.0" layoutY="191.0" prefHeight="469.0"
+			prefWidth="354.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="177.0" minWidth="10.0" prefWidth="177.0" />
+				<ColumnConstraints hgrow="SOMETIMES"
+					maxWidth="177.0" minWidth="10.0" prefWidth="177.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="144.0" minHeight="10.0"
+					prefHeight="121.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="93.0" minHeight="9.0"
+					prefHeight="33.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="163.0" minHeight="10.0"
+					prefHeight="123.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="108.0" minHeight="5.0"
+					prefHeight="34.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="126.0" minHeight="10.0"
+					prefHeight="123.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="80.0" minHeight="10.0"
+					prefHeight="35.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<ImageView fx:id="vendingItem1" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.halignment="CENTER">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="vendingItem2" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.columnIndex="1" GridPane.halignment="CENTER">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="vendingItem3" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.halignment="CENTER" GridPane.rowIndex="2">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="vendingItem4" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.columnIndex="1" GridPane.halignment="CENTER"
+					GridPane.rowIndex="2">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="vendingItem5" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.halignment="CENTER" GridPane.rowIndex="4">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<ImageView fx:id="vendingItem6" fitHeight="140.0"
+					fitWidth="170.0" pickOnBounds="true" preserveRatio="true"
+					GridPane.columnIndex="1" GridPane.halignment="CENTER"
+					GridPane.rowIndex="4">
+					<image>
+						<Image url="@../../../../../assets/ticket.png" />
+					</image>
+				</ImageView>
+				<Button fx:id="buttonItem1" mnemonicParsing="false"
+					onAction="#pushButtonItem1" prefHeight="27.0" prefWidth="164.0"
+					text="Item1 XX円" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+				<Button fx:id="buttonItem2" mnemonicParsing="false"
+					onAction="#pushButtonItem2" prefHeight="27.0" prefWidth="164.0"
+					text="Item2 XX円" GridPane.columnIndex="1"
+					GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+				<Button fx:id="buttonItem3" mnemonicParsing="false"
+					onAction="#pushButtonItem3" prefHeight="27.0" prefWidth="164.0"
+					text="Item3 XX円" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+				<Button fx:id="buttonItem4" mnemonicParsing="false"
+					onAction="#pushButtonItem4" prefHeight="27.0" prefWidth="164.0"
+					text="Item4 XX円" GridPane.columnIndex="1"
+					GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+				<Button fx:id="buttonItem5" mnemonicParsing="false"
+					onAction="#pushButtonItem5" prefHeight="27.0" prefWidth="164.0"
+					text="Item5 XX円" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+				<Button fx:id="buttonItem6" mnemonicParsing="false"
+					onAction="#pushButtonItem6" prefHeight="27.0" prefWidth="164.0"
+					text="Item6 XX円" GridPane.columnIndex="1"
+					GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+			</children>
+		</GridPane>
+		<Label fx:id="labelCounter" alignment="CENTER_RIGHT"
+			layoutX="29.0" layoutY="28.0" prefHeight="39.0" prefWidth="92.0"
+			text="0">
+			<font>
+				<Font size="18.0" />
+			</font>
+		</Label>
+		<Button layoutX="128.0" layoutY="28.0" mnemonicParsing="false"
+			onAction="#buttonReturnMoney" prefHeight="39.0" prefWidth="42.0"
+			text="BK" />
+		<TextField fx:id="inputMoney" alignment="CENTER_RIGHT"
+			layoutX="229.0" layoutY="28.0" prefHeight="39.0" prefWidth="98.0"
+			promptText="0">
+			<font>
+				<Font size="18.0" />
+			</font>
+		</TextField>
+		<Button layoutX="331.0" layoutY="28.0" mnemonicParsing="false"
+			onAction="#buttonInputMoney" prefHeight="39.0" prefWidth="42.0"
+			text="IN" />
+		<Label fx:id="labelOutItem" alignment="CENTER"
+			contentDisplay="CENTER" layoutX="29.0" layoutY="693.0"
+			prefHeight="80.0" prefWidth="341.0" text="取出口">
+			<font>
+				<Font size="18.0" />
+			</font>
+		</Label>
+		<Label fx:id="labelOutMessage" alignment="CENTER" layoutX="23.0"
+			layoutY="119.0" prefHeight="39.0" prefWidth="354.0" text="メッセージエリア">
+			<font>
+				<Font size="14.0" />
+			</font>
+		</Label>
+	</children>
+</AnchorPane>
