@@ -19,7 +19,9 @@ public class Main extends Application {
 			Scene scene = new Scene(root, 400, 800);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("X2AXXX Vending Machine");
+			primaryStage.setTitle("J2A232 Vending Machine");
+			primaryStage.setX(1500);
+			primaryStage.setY(500);
 
 			// アプリの表示
 			primaryStage.show();
