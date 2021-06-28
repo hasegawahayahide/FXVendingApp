@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import jp.ac.hcs.vending.machine.Ticket;
+import jp.ac.hcs.vending.machine.VendingItem;
 import jp.ac.hcs.vending.machine.VendingMachine;
 
 /**
@@ -115,42 +116,78 @@ public class VendingController {
 
 	@FXML
 	void buttonInputMoney(ActionEvent event) {
-		// TODO
+		int input = 0;
+		try {
+			input = Integer.parseInt(inputMoney.getText());
+		} catch (NumberFormatException e) {
+			System.out.println("文字から数値に変換できませんでした。");
+			e.printStackTrace();
+			return;
+		}
+		// 入金
+		try {
+		String result = this.vendingMachine.addMoney(input);
+		viewMessage("お金が投入されました。" + result);
+	} catch (IllegalArgumentException e) {
+		}
 	}
 
 	@FXML
 	void buttonReturnMoney(ActionEvent event) {
-		// TODO
+		// 返金する
+		String cointsText = this.vendingMachine.resetMoney();
+		viewMessage("お釣りです。ありがとうございました。",cointsText);
 	}
 
 	@FXML
 	void pushButtonItem1(ActionEvent event) {
-		// TODO
+		buyItem(1);
+	}
+		private void buyItem(int no) {
+		VendingItem item = this.vendingMachine.buyItem(1);
+		switch (item.getStatusCode()) {
+		case 0: // 購入成功
+			this.viewMessage("商品を購入しました!",item.showItemInfo());
+			// TODO 音鳴らす
+			break;
+		case 1: // 残高不足
+			this.viewMessage("残高が不足しています");
+			// TODO 音鳴らす
+			break;
+		case 2: // 在庫不足
+			this.viewMessage("残高がありません");
+			// TODO 音鳴らす
+			break;
+		default:
+			// 初期表示
+			this.viewMessage();
+			break;
+		}
 	}
 
 	@FXML
 	void pushButtonItem2(ActionEvent event) {
-		// TODO
+		buyItem(2);
 	}
 
 	@FXML
 	void pushButtonItem3(ActionEvent event) {
-		// TODO
+		buyItem(3);
 	}
 
 	@FXML
 	void pushButtonItem4(ActionEvent event) {
-		// TODO
+		buyItem(4);
 	}
 
 	@FXML
 	void pushButtonItem5(ActionEvent event) {
-		// TODO
+		buyItem(5);
 	}
 
 	@FXML
 	void pushButtonItem6(ActionEvent event) {
-		// TODO
+		buyItem(6);
 	}
 
 }

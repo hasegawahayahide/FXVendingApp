@@ -53,18 +53,69 @@ public class VendingMachine {
 		return this.keepMoney + "円";
 	}
 
-	public String addMoney(int Money) {
-		// TODO
-		return null;
+	/**
+	 * 入金する
+	 * @param money
+	 * @return 入金結果（入金金額またはエラーメッセージ）
+	 * @throws IllegalArgumentException 入金できない金額だった
+	 */
+	public String addMoney(int money) throws IllegalArgumentException {
+		// TODO 金種チェック
+		// 入金
+		this.keepMoney += money;
+		// 入金結果のメッセージ
+		StringBuilder sb = new StringBuilder();
+		sb.append("[").append(money).append("]円");
+		return sb.toString();
 	}
 
+	/**
+	 * 保持金額を返却する
+	 * @return 出金結果（金種ごとの枚数）
+	 */
 	public String resetMoney() {
-		// TODO
-		return null;
+		String cointsText = createCoinsText();
+		this.keepMoney = 0;
+		return cointsText;
 	}
 
+	/**
+	 * 各金種が何枚かを計算し、返却する
+	 * @param money 対象金額
+	 * @return 表示用テキスト
+	 */
+	private String createCoinsText() {
+		int money = this.keepMoney;
+		StringBuilder sb= new StringBuilder();
+		sb.append(money).append("円\n");
+		// 金種を数える
+		int count1000 = money / 1000;
+		sb.append("1,000:").append(count1000).append("枚");
+		money = money % 1000;
+		int count500 = money / 500;
+		sb.append("500:").append(count500).append("枚");
+		money = money % 500;
+		int count100 = money / 100;
+		sb.append("100:").append(count100).append("枚");
+		money = money % 100;
+		int count10 = money / 10;
+		sb.append("10:").append(count10).append("枚");
+		money = money % 10;
+		return sb.toString();
+	}
+
+	/**
+	 * 商品を購入する
+	 * @param num 商品の番号
+	 * @return 商品
+	 */
 	public VendingItem buyItem(int no) {
-		// TODO
-		return null;
+		// 選択番号-1で位置を補正
+		VendingItem item = this.itemArray.get(no - 1).buyItem(this.keepMoney);
+		// 購入成功した場合
+		if (item.getStatusCode() == 0) {
+			this.keepMoney -= item.getPrice();
+		}
+		return item;
 	}
 }

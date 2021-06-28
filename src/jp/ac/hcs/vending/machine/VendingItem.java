@@ -37,8 +37,22 @@ public abstract class VendingItem {
 		return this.name + "[" + this.price + "円]";
 	}
 
+	/**
+	 * 商品を購入する
+	 * @param keepMoney 保持金額
+	 * @return 商品（結果がステータスとして設定される）
+	 */
 	public VendingItem buyItem(int keepMoney) {
-		// TODO
+		if (keepMoney < this.price) {
+			// 残高不足
+			this.statusCode = 1;
+		}//TODO 在庫不足かのチェック
+		else {
+			// 購入成功
+			this.statusCode = 0;
+			// 在庫を減らす
+			this.count -= 1;
+		}
 		return this;
 	}
 
