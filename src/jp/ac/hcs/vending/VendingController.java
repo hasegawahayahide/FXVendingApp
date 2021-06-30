@@ -5,10 +5,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import jp.ac.hcs.vending.machine.Ticket;
 import jp.ac.hcs.vending.machine.VendingItem;
 import jp.ac.hcs.vending.machine.VendingMachine;
+import jp.ac.hcs.vending.util.Sound;
 
 /**
  * HCS自動販売機アプリのUI関連を管理するクラス
@@ -101,9 +103,15 @@ public class VendingController {
 		vendingMachine.addVendingItem(new Ticket("チケット2", 300, 10, "全俺が泣いた", "泣けるストーリー"));
 		vendingMachine.addVendingItem(new Ticket("チケット3", 200, 3, "ハイテンション必須", "楽しいストーリー"));
 		vendingMachine.addVendingItem(new Ticket("チケット4", 250, 5, "寝られない方必見", "難しいストーリー"));
-		vendingMachine.addVendingItem(new Ticket("チケット5", 2000, 2, "決別は突然に", "儚いラブストーリー"));
-		vendingMachine.addVendingItem(new Ticket("チケット6", 10000, 1, "野生の動物との出会い", "ハートフルストーリー"));
+		// vendingMachine.addVendingItem(new Ticket("チケット5", 2000, 2, "決別は突然に", "儚いラブストーリー"));
+		// vendingMachine.addVendingItem(new Ticket("チケット6", 10000, 1, "野生の動物との出会い", "ハートフルストーリー"));
+		// チケットじゃないけど
+		vendingMachine.addVendingItem(new Ticket("ポカリ",150,2,"",""));
+		vendingMachine.addVendingItem(new Ticket("ビール",250,1,"",""));
 
+		// 商品画像変更
+		vendingItem5.setImage(new Image("file:assets/pokari.png"));
+		vendingItem6.setImage(new Image("file:assets/beer.png"));
 
 		// 商品に応じたボタン名を設定
 		buttonItem1.setText(vendingMachine.getButtonText(1));
@@ -116,6 +124,7 @@ public class VendingController {
 
 	@FXML
 	void buttonInputMoney(ActionEvent event) {
+		Sound sound = new Sound();
 		int input = 0;
 		try {
 			input = Integer.parseInt(inputMoney.getText());
@@ -128,6 +137,7 @@ public class VendingController {
 		try {
 		String result = this.vendingMachine.addMoney(input);
 		viewMessage("お金が投入されました。" + result);
+		sound.playSound("assets/money-in.wav");
 	} catch (IllegalArgumentException e) {
 		}
 	}
@@ -135,8 +145,10 @@ public class VendingController {
 	@FXML
 	void buttonReturnMoney(ActionEvent event) {
 		// 返金する
+		Sound sound = new Sound();
 		String cointsText = this.vendingMachine.resetMoney();
 		viewMessage("お釣りです。ありがとうございました。",cointsText);
+		sound.playSound("assets/money-out.wav");
 	}
 
 	@FXML
@@ -144,19 +156,20 @@ public class VendingController {
 		buyItem(1);
 	}
 		private void buyItem(int no) {
+			Sound sound = new Sound();
 		VendingItem item = this.vendingMachine.buyItem(1);
 		switch (item.getStatusCode()) {
 		case 0: // 購入成功
 			this.viewMessage("商品を購入しました!",item.showItemInfo());
-			// TODO 音鳴らす
+			sound.playSound("assets/money-out.wav");
 			break;
 		case 1: // 残高不足
 			this.viewMessage("残高が不足しています");
-			// TODO 音鳴らす
+			sound.playSound("assets/maru.wav");
 			break;
 		case 2: // 在庫不足
 			this.viewMessage("残高がありません");
-			// TODO 音鳴らす
+			sound.playSound("assets/batsu.wav");
 			break;
 		default:
 			// 初期表示
